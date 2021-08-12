@@ -41,8 +41,8 @@ function Human(Name, Height, Weight, Diet) {
 
 
 const comparemethods = {
-    compareWeight: function (humanWeight) {
-        let weightDifference = this.weight - humanWeight;
+    compareWeight: function (Weight) {
+        let weightDifference = this.weight - Weight;
         if (weightDifference > 0) {
             return `${this.species} weighs ${weightDifference} pounds than you!`;
         } else if (weightDifference < 0) {
@@ -52,8 +52,8 @@ const comparemethods = {
             return `You weight the same as ${this.species}!`;
         }
     },
-    compareHeight: function (humanHeight) {
-        let heightDifference = this.height - humanHeight;
+    compareHeight: function (Height) {
+        let heightDifference = this.height - Height;
         if (heightDifference > 0) {
             return `${this.species} is ${heightDifference} inches taller than you!`;
         } else if (heightDifference < 0) {
@@ -63,11 +63,11 @@ const comparemethods = {
             return `You are the same height as ${this.species}!`;
         }
     },
-    compareDiet: function (humanDiet) {
-        if (this.diet === humanDiet.toLowerCase()) {
+    compareDiet: function (Diet) {
+        if (this.diet === Diet.toLowerCase()) {
             return `You have the same diet as a ${this.species}!`;
         } else {
-            return `The ${this.species} is a ${this.diet} and you are a ${humanDiet}`;
+            return `The ${this.species} is a ${this.diet} and you are a ${Diet}`;
         }
     },
 };
@@ -139,10 +139,14 @@ document.getElementById("btn").addEventListener("click", (e) => {
     humaninfo = (function gethuman() {
             let human = new Human();
             human.name = document.getElementById("name").value;
-            const feetHeight = document.getElementById("feet").value;
-            const inchesHeight = document.getElementById("inches").value;
+            let feetHeight = parseInt(document.getElementById("feet").value);
+            let inchesHeight = parseInt(document.getElementById("inches").value);
+            if (Number.isNaN(feetHeight)){ feetHeight = 0}
+            if (Number.isNaN(inchesHeight)){ inchesHeight = 0}
             human.height = feetHeight * 12 + inchesHeight;
-            human.weight = document.getElementById("weight").value;
+            let weight =parseInt(document.getElementById("weight").value);
+            if (Number.isNaN(weight)){ weight = 0}
+            human.weight = weight;
             human.diet = document.getElementById("diet").value;
             return human;
         }
